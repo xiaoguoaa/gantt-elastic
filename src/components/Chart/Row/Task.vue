@@ -68,6 +68,28 @@
       ></polygon>
       <progress-bar :task="task" :clip-path="'url(#' + clipPathId + ')'"></progress-bar>
     </svg>
+    <svg
+      class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-task"
+      style="{ pointEvent: 'none' }"
+      :style="{ ...root.style['chart-row-bar'], ...root.style['chart-row-task'], ...task.style['chart-row-bar'] }"
+      :x="task.x2"
+      :y="task.y2"
+      :width="task.width2"
+      :height="task.height2"
+      :viewBox="`0 0 ${task.width2} ${task.height2}`"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        class="gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-task-polygon fill-red"
+        :style="{
+          ...root.style['chart-row-bar-polygon'],
+          ...root.style['chart-row-task-polygon'],
+          ...task.style['base'],
+          ...task.style['chart-row-bar-polygon']
+        }"
+        :points="getPoints2"
+      ></polygon>
+    </svg>
     <chart-text :task="task" v-if="root.state.options.chart.text.display"></chart-text>
   </g>
 </template>
@@ -108,7 +130,16 @@ export default {
     getPoints() {
       const task = this.task;
       return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
+    },
+    getPoints2() {
+      const task = this.task;
+      return `0,0 ${task.width2},0 ${task.width2},${task.height2} 0,${task.height2}`;
     }
   }
 };
 </script>
+<style scoped>
+.fill-red {
+  fill: rgb(235, 89, 89) !important;
+}
+</style>

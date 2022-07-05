@@ -10,7 +10,7 @@
   <svg
     class="gantt-elastic__chart-row-text-wrapper"
     :style="{ ...root.style['chart-row-text-wrapper'] }"
-    :x="task.x + task.width + root.state.options.chart.text.offset"
+    :x="getX"
     :y="task.y - root.state.options.chart.grid.horizontal.gap"
     :width="getWidth"
     :height="getHeight"
@@ -56,6 +56,11 @@ export default {
     return {};
   },
   computed: {
+    getX() {
+      let x1 = this.task.x + this.task.width + this.root.state.options.chart.text.offset;
+      let x2 = this.task.x2 + this.task.width2 + this.root.state.options.chart.text.offset;
+      return Math.max(x1, x2);
+    },
     /**
      * Get width
      *
