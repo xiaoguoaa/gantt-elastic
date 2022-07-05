@@ -1,7 +1,7 @@
 {
-  "name": "gantt-elastic",
-  "version": "1.0.12",
-  "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. Project manager responsive gantt. jquery gantt.",
+  "name": "gantt-elastic-plus",
+  "version": "1.0.0",
+  "description": "基于gantt-elastic的一些调整",
   "main": "src/GanttElastic.vue",
   "dependencies": {
     "dayjs": "^1.8.16",
@@ -62,11 +62,8 @@
     "project",
     "task"
   ],
-  "author": "Rafal Pospiech <neuronet.io@gmail.com> (https://neuronet.io)",
+  "author": "Guo Wenhao",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/neuronetio/gantt-elastic/issues"
-  },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
