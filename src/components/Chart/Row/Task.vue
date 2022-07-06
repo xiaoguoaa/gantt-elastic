@@ -12,7 +12,7 @@
     :style="{
       ...root.style['chart-row-bar-wrapper'],
       ...root.style['chart-row-task-wrapper'],
-      ...task.style['chart-row-bar-wrapper']
+      ...task.style['chart-row-bar-wrapper'],
     }"
   >
     <foreignObject
@@ -20,7 +20,7 @@
       :style="{
         ...root.style['chart-expander'],
         ...root.style['chart-expander--task'],
-        ...task.style['chart-expander']
+        ...task.style['chart-expander'],
       }"
       :x="task.x - root.state.options.chart.expander.offset - root.state.options.chart.expander.size"
       :y="task.y + (root.state.options.row.height - root.state.options.chart.expander.size) / 2"
@@ -62,15 +62,20 @@
           ...root.style['chart-row-bar-polygon'],
           ...root.style['chart-row-task-polygon'],
           ...task.style['base'],
-          ...task.style['chart-row-bar-polygon']
+          ...task.style['chart-row-bar-polygon'],
         }"
         :points="getPoints"
       ></polygon>
       <progress-bar :task="task" :clip-path="'url(#' + clipPathId + ')'"></progress-bar>
     </svg>
     <svg
+      v-if="task.x2"
       class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-task"
-      style="{ pointEvent: 'none' }"
+      style="
+         {
+          pointevent: 'none';
+        }
+      "
       :style="{ ...root.style['chart-row-bar'], ...root.style['chart-row-task'], ...task.style['chart-row-bar'] }"
       :x="task.x2"
       :y="task.y2"
@@ -85,7 +90,7 @@
           ...root.style['chart-row-bar-polygon'],
           ...root.style['chart-row-task-polygon'],
           ...task.style['base'],
-          ...task.style['chart-row-bar-polygon']
+          ...task.style['chart-row-bar-polygon'],
         }"
         :points="getPoints2"
       ></polygon>
@@ -104,7 +109,7 @@ export default {
   components: {
     ChartText,
     ProgressBar,
-    Expander
+    Expander,
   },
   inject: ['root'],
   props: ['task'],
@@ -134,8 +139,8 @@ export default {
     getPoints2() {
       const task = this.task;
       return `0,0 ${task.width2},0 ${task.width2},${task.height2} 0,${task.height2}`;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

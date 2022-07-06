@@ -7,7 +7,7 @@
  */
 -->
 <template>
-  <div class="gantt-elastic" style="width:100%">
+  <div class="gantt-elastic" style="width: 100%">
     <slot name="header"></slot>
     <main-view ref="mainView"></main-view>
     <slot name="footer"></slot>
@@ -45,7 +45,7 @@ function getOptions(userOptions) {
   }
   return {
     slots: {
-      header: {}
+      header: {},
     },
     taskMapping: {
       //*
@@ -56,7 +56,7 @@ function getOptions(userOptions) {
       progress: 'progress',
       type: 'type',
       style: 'style',
-      collapsed: 'collapsed'
+      collapsed: 'collapsed',
     },
     width: 0,
     height: 0,
@@ -73,7 +73,7 @@ function getOptions(userOptions) {
         left: 0,
         right: 0,
         top: 0,
-        bottom: 0
+        bottom: 0,
       },
       chart: {
         left: 0,
@@ -86,14 +86,14 @@ function getOptions(userOptions) {
         timeCenter: 0,
         dateTime: {
           left: '',
-          right: ''
-        }
-      }
+          right: '',
+        },
+      },
     },
     scope: {
       //*
       before: 1,
-      after: 1
+      after: 1,
     },
     times: {
       timeScale: 60 * 1000,
@@ -106,37 +106,37 @@ function getOptions(userOptions) {
       totalViewDurationMs: 0,
       totalViewDurationPx: 0,
       stepDuration: 'day',
-      steps: []
+      steps: [],
     },
     row: {
-      height: 24 //*
+      height: 24, //*
     },
     maxRows: 20, //*
     maxHeight: 0, //*
     chart: {
       grid: {
         horizontal: {
-          gap: 6 //*
-        }
+          gap: 6, //*
+        },
       },
       progress: {
         width: 20, //*
         height: 6, //*
         pattern: true,
-        bar: false
+        bar: false,
       },
       text: {
         offset: 4, //*
         xPadding: 10, //*
-        display: true //*
+        display: true, //*
       },
       expander: {
         type: 'chart',
         display: false, //*
         displayIfTaskListHidden: true, //*
         offset: 4, //*
-        size: 18
-      }
+        size: 18,
+      },
     },
     taskList: {
       display: true, //*
@@ -148,8 +148,8 @@ function getOptions(userOptions) {
           id: 0,
           label: 'ID',
           value: 'id',
-          width: 40
-        }
+          width: 40,
+        },
       ],
       percent: 100, //*
       width: 0,
@@ -162,8 +162,8 @@ function getOptions(userOptions) {
         columnWidth: 24,
         padding: 16,
         margin: 10,
-        straight: false
-      }
+        straight: false,
+      },
     },
     calendar: {
       workingDays: [1, 2, 3, 4, 5], //*
@@ -178,7 +178,7 @@ function getOptions(userOptions) {
         formatted: {
           long: [],
           medium: [],
-          short: []
+          short: [],
         },
         format: {
           //*
@@ -190,8 +190,8 @@ function getOptions(userOptions) {
           },
           short(date) {
             return date.format('HH');
-          }
-        }
+          },
+        },
       },
       day: {
         height: 20, //*
@@ -207,8 +207,8 @@ function getOptions(userOptions) {
           },
           short(date) {
             return date.format('DD');
-          }
-        }
+          },
+        },
       },
       month: {
         height: 20, //*
@@ -225,9 +225,9 @@ function getOptions(userOptions) {
           },
           long(date) {
             return date.format('MMMM YYYY');
-          }
-        }
-      }
+          },
+        },
+      },
     },
     locale: {
       //*
@@ -251,7 +251,7 @@ function getOptions(userOptions) {
         M: 'a month',
         MM: '%d months',
         y: 'a year',
-        yy: '%d years'
+        yy: '%d years',
       },
       formats: {
         LT: 'HH:mm',
@@ -259,14 +259,14 @@ function getOptions(userOptions) {
         L: 'DD/MM/YYYY',
         LL: 'D MMMM YYYY',
         LLL: 'D MMMM YYYY HH:mm',
-        LLLL: 'dddd, D MMMM YYYY HH:mm'
+        LLLL: 'dddd, D MMMM YYYY HH:mm',
       },
-      ordinal: n => {
+      ordinal: (n) => {
         const s = ['th', 'st', 'nd', 'rd'];
         const v = n % 100;
         return `[${n}${s[(v - 20) % 10] || s[v] || s[0]}]`;
-      }
-    }
+      },
+    },
   };
 }
 
@@ -277,10 +277,7 @@ function getOptions(userOptions) {
  */
 function prepareStyle(userStyle) {
   let fontSize = '12px';
-  let fontFamily = window
-    .getComputedStyle(document.body)
-    .getPropertyValue('font-family')
-    .toString();
+  let fontFamily = window.getComputedStyle(document.body).getPropertyValue('font-family').toString();
   if (typeof userStyle !== 'undefined') {
     if (typeof userStyle.fontSize !== 'undefined') {
       fontSize = userStyle.fontSize;
@@ -446,7 +443,7 @@ export function notEqualDeep(left, right, cache = [], path = '') {
 const GanttElastic = {
   name: 'GanttElastic',
   components: {
-    MainView
+    MainView,
   },
   props: ['tasks', 'options', 'dynamicStyle'],
   provide() {
@@ -454,7 +451,7 @@ const GanttElastic = {
     const self = this;
     Object.defineProperty(provider, 'root', {
       enumerable: true,
-      get: () => self
+      get: () => self,
     });
     return provider;
   },
@@ -468,8 +465,8 @@ const GanttElastic = {
           outerHeight: 0,
           scroll: {
             left: 0,
-            top: 0
-          }
+            top: 0,
+          },
         },
         dynamicStyle: {},
         refs: {},
@@ -484,8 +481,8 @@ const GanttElastic = {
         unwatchStyle: null,
         unwatchOutputTasks: null,
         unwatchOutputOptions: null,
-        unwatchOutputStyle: null
-      }
+        unwatchOutputStyle: null,
+      },
     };
   },
   methods: {
@@ -593,7 +590,7 @@ const GanttElastic = {
           progress: task[options.taskMapping.progress],
           type: task[options.taskMapping.type],
           style: task[options.taskMapping.style],
-          collapsed: task[options.taskMapping.collapsed]
+          collapsed: task[options.taskMapping.collapsed],
         };
       }
       return tasks;
@@ -630,7 +627,7 @@ const GanttElastic = {
       tasks = this.fillTasks(tasks);
       this.state.tasksById = this.resetTaskTree(tasks);
       this.state.taskTree = this.makeTaskTree(this.state.rootTask, tasks);
-      this.state.tasks = this.state.taskTree.allChildren.map(childId => this.getTask(childId));
+      this.state.tasks = this.state.taskTree.allChildren.map((childId) => this.getTask(childId));
       this.calculateTaskListColumnsDimensions();
       this.state.options.scrollBarHeight = this.getScrollBarHeight();
       this.state.options.outerHeight = this.state.options.height + this.state.options.scrollBarHeight;
@@ -660,7 +657,7 @@ const GanttElastic = {
      */
     getMaximalLevel() {
       let maximalLevel = 0;
-      this.state.tasks.forEach(task => {
+      this.state.tasks.forEach((task) => {
         if (task.parents.length > maximalLevel) {
           maximalLevel = task.parents.length;
         }
@@ -688,7 +685,10 @@ const GanttElastic = {
         this.state.refs.taskListItems &&
         this.state.refs.chartGraph.scrollTop !== this.state.refs.taskListItems.scrollTop
       ) {
-        this.state.options.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
+        this.state.options.scroll.top =
+          this.state.refs.taskListItems.scrollTop =
+          this.state.refs.chartScrollContainerVertical.scrollTop =
+            this.state.refs.chartGraph.scrollTop;
       }
     },
 
@@ -725,7 +725,7 @@ const GanttElastic = {
         allChildren: [],
         parents: [],
         parent: null,
-        __root: true
+        __root: true,
       });
       const tasksById = {};
       for (let i = 0, len = tasks.length; i < len; i++) {
@@ -750,7 +750,7 @@ const GanttElastic = {
         let current = tasks[i];
         if (current.parentId === task.id) {
           if (task.parents.length) {
-            task.parents.forEach(parent => current.parents.push(parent));
+            task.parents.forEach((parent) => current.parents.push(parent));
           }
           if (!task.propertyIsEnumerable('__root')) {
             current.parents.push(task.id);
@@ -762,7 +762,7 @@ const GanttElastic = {
           current = this.makeTaskTree(current, tasks);
           task.allChildren.push(current.id);
           task.children.push(current.id);
-          current.allChildren.forEach(childId => task.allChildren.push(childId));
+          current.allChildren.forEach((childId) => task.allChildren.push(childId));
         }
       }
       return task;
@@ -788,7 +788,7 @@ const GanttElastic = {
      * @returns {array} children
      */
     getChildren(taskId) {
-      return this.state.tasks.filter(task => task.parent === taskId);
+      return this.state.tasks.filter((task) => task.parent === taskId);
     },
 
     /**
@@ -824,7 +824,7 @@ const GanttElastic = {
      * @returns {Promise} when resolved returns base64 image string of gantt
      */
     getImage(type = 'image/png') {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement('canvas');
@@ -1153,8 +1153,8 @@ const GanttElastic = {
         time: currentDate.valueOf(),
         offset: {
           ms: 0,
-          px: 0
-        }
+          px: 0,
+        },
       });
       for (
         let currentDate = dayjs(this.state.options.times.firstTime)
@@ -1169,20 +1169,20 @@ const GanttElastic = {
           time: currentDate.valueOf(),
           offset: {
             ms: offsetMs,
-            px: offsetPx
-          }
+            px: offsetPx,
+          },
         };
         const previousStep = steps[steps.length - 1];
         previousStep.width = {
           ms: offsetMs - previousStep.offset.ms,
-          px: offsetPx - previousStep.offset.px
+          px: offsetPx - previousStep.offset.px,
         };
         steps.push(step);
       }
       const lastStep = steps[steps.length - 1];
       lastStep.width = {
         ms: this.state.options.times.totalViewDurationMs - lastStep.offset.ms,
-        px: this.state.options.times.totalViewDurationPx - lastStep.offset.px
+        px: this.state.options.times.totalViewDurationPx - lastStep.offset.px,
       };
       this.state.options.times.steps = steps;
     },
@@ -1238,20 +1238,20 @@ const GanttElastic = {
       let currentDate = dayjs(this.state.options.times.steps[0].time).locale(localeName);
       let maxWidths = this.state.options.calendar.day.maxWidths;
       this.state.options.calendar.day.widths = [];
-      Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
+      Object.keys(this.state.options.calendar.day.format).forEach((formatName) => {
         maxWidths[formatName] = 0;
       });
       for (let day = 0, daysLen = this.state.options.times.steps.length; day < daysLen; day++) {
         const widths = {
-          day
+          day,
         };
-        Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
+        Object.keys(this.state.options.calendar.day.format).forEach((formatName) => {
           widths[formatName] = this.state.ctx.measureText(
             this.state.options.calendar.day.format[formatName](currentDate)
           ).width;
         });
         this.state.options.calendar.day.widths.push(widths);
-        Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
+        Object.keys(this.state.options.calendar.day.format).forEach((formatName) => {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
@@ -1295,7 +1295,7 @@ const GanttElastic = {
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let maxWidths = this.state.options.calendar.month.maxWidths;
       this.state.options.calendar.month.widths = [];
-      Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
+      Object.keys(this.state.options.calendar.month.format).forEach((formatName) => {
         maxWidths[formatName] = 0;
       });
       const localeName = this.state.options.locale.name;
@@ -1303,15 +1303,15 @@ const GanttElastic = {
       const monthsCount = this.monthsCount(this.state.options.times.firstTime, this.state.options.times.lastTime);
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
-          month
+          month,
         };
-        Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
+        Object.keys(this.state.options.calendar.month.format).forEach((formatName) => {
           widths[formatName] = this.state.ctx.measureText(
             this.state.options.calendar.month.format[formatName](currentDate)
           ).width;
         });
         this.state.options.calendar.month.widths.push(widths);
-        Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
+        Object.keys(this.state.options.calendar.month.format).forEach((formatName) => {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
@@ -1331,13 +1331,13 @@ const GanttElastic = {
         if (task.startTime < firstTaskTime) {
           firstTaskTime = task.startTime;
         }
-        if (task.startTime2 < firstTaskTime) {
+        if (task.startTime2 && task.startTime2 < firstTaskTime) {
           firstTaskTime = task.startTime2;
         }
         if (task.startTime + task.duration > lastTaskTime) {
           lastTaskTime = task.startTime + task.duration;
         }
-        if (task.startTime2 + task.duration2 > lastTaskTime) {
+        if (task.startTime2 && task.startTime2 + task.duration2 > lastTaskTime) {
           lastTaskTime = task.startTime2 + task.duration2;
         }
       }
@@ -1393,18 +1393,18 @@ const GanttElastic = {
         if (diffPercent < 0) {
           diffPercent = 0;
         }
-        this.state.options.taskList.columns.forEach(column => {
+        this.state.options.taskList.columns.forEach((column) => {
           column.thresholdPercent = diffPercent;
         });
       } else {
-        this.state.options.taskList.columns.forEach(column => {
+        this.state.options.taskList.columns.forEach((column) => {
           column.thresholdPercent = 100;
         });
       }
       this.calculateTaskListColumnsDimensions();
       this.$emit('calendar-recalculate');
       this.syncScrollTop();
-    }
+    },
   },
 
   computed: {
@@ -1414,7 +1414,7 @@ const GanttElastic = {
      * For example when task is collapsed - children of this task are not visible - we should not render them
      */
     visibleTasks() {
-      const visibleTasks = this.state.tasks.filter(task => this.isTaskVisible(task));
+      const visibleTasks = this.state.tasks.filter((task) => this.isTaskVisible(task));
       const maxRows = visibleTasks.slice(0, this.state.options.maxRows);
       this.state.options.rowsHeight = this.getTasksHeight(maxRows);
       let heightCompensation = 0;
@@ -1438,13 +1438,16 @@ const GanttElastic = {
         task.y =
           (this.state.options.row.height + this.state.options.chart.grid.horizontal.gap * 2) * index +
           this.state.options.chart.grid.horizontal.gap;
-        task.width2 = task.duration2 / this.state.options.times.timePerPixel - this.style['grid-line-vertical']['stroke-width'];
+        if (task.duration2) {
+          task.width2 =
+            task.duration2 / this.state.options.times.timePerPixel - this.style['grid-line-vertical']['stroke-width'];
+          task.height2 = task.height - 12;
+          task.x2 = this.timeToPixelOffsetX(task.startTime2);
+          task.y2 = task.y + 6;
+        }
         if (task.width2 < 0) {
           task.width2 = 0;
         }
-        task.height2 = task.height - 12;
-        task.x2 = this.timeToPixelOffsetX(task.startTime2);
-        task.y2 = task.y + 6;
       }
       console.log('visibleTasks-----------------------------', visibleTasks);
       return visibleTasks;
@@ -1477,7 +1480,7 @@ const GanttElastic = {
      */
     outputOptions() {
       return this.state.options;
-    }
+    },
   },
 
   /**
@@ -1488,7 +1491,7 @@ const GanttElastic = {
     this.setup();
     this.state.unwatchTasks = this.$watch(
       'tasks',
-      tasks => {
+      (tasks) => {
         const notEqual = notEqualDeep(tasks, this.outputTasks);
         if (notEqual) {
           this.setup('tasks');
@@ -1498,7 +1501,7 @@ const GanttElastic = {
     );
     this.state.unwatchOptions = this.$watch(
       'options',
-      opts => {
+      (opts) => {
         const notEqual = notEqualDeep(opts, this.outputOptions);
         if (notEqual) {
           this.setup('options');
@@ -1508,7 +1511,7 @@ const GanttElastic = {
     );
     this.state.unwatchStyle = this.$watch(
       'dynamicStyle',
-      style => {
+      (style) => {
         const notEqual = notEqualDeep(style, this.dynamicStyle);
         if (notEqual) {
           this.initializeStyle();
@@ -1519,21 +1522,24 @@ const GanttElastic = {
 
     this.state.unwatchOutputTasks = this.$watch(
       'outputTasks',
-      tasks => {
-        this.$emit('tasks-changed', tasks.map(task => task));
+      (tasks) => {
+        this.$emit(
+          'tasks-changed',
+          tasks.map((task) => task)
+        );
       },
       { deep: true }
     );
     this.state.unwatchOutputOptions = this.$watch(
       'outputOptions',
-      options => {
+      (options) => {
         this.$emit('options-changed', mergeDeep({}, options));
       },
       { deep: true }
     );
     this.state.unwatchOutputStyle = this.$watch(
       'style',
-      style => {
+      (style) => {
         this.$emit('dynamic-style-changed', mergeDeep({}, style));
       },
       { deep: true }
@@ -1601,7 +1607,7 @@ const GanttElastic = {
    */
   destroyed() {
     this.$emit('destroyed');
-  }
+  },
 };
 export default GanttElastic;
 </script>

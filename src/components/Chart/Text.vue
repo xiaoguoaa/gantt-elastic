@@ -58,7 +58,10 @@ export default {
   computed: {
     getX() {
       let x1 = this.task.x + this.task.width + this.root.state.options.chart.text.offset;
-      let x2 = this.task.x2 + this.task.width2 + this.root.state.options.chart.text.offset;
+      let x2 = 0;
+      if(this.task.x2) {
+        x2 = this.task.x2 + this.task.width2 + this.root.state.options.chart.text.offset
+      }
       return Math.max(x1, x2);
     },
     /**
