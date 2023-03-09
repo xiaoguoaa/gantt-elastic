@@ -72,8 +72,8 @@
       v-if="task.x2"
       class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-task"
       style="
-         {
-          pointevent: 'none';
+          {
+          pointevent: 'none'
         }
       "
       :style="{ ...root.style['chart-row-bar'], ...root.style['chart-row-task'], ...task.style['chart-row-bar'] }"
@@ -91,6 +91,7 @@
           ...root.style['chart-row-task-polygon'],
           ...task.style['base'],
           ...task.style['chart-row-bar-polygon'],
+          fill: task.completeFill ? task.completeFill + ' !important' : 'rgb(235, 89, 89) !important',
         }"
         :points="getPoints2"
       ></polygon>
